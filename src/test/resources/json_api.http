@@ -1,0 +1,25 @@
+
+###Asking for the latest stored for a currency
+POST http://localhost:8181/json_api/current
+Accept: application/json
+Content-Type: application/json
+
+{
+  "requestId": "b89577fe-8c37-4962-8af3-7cb89a245160",
+  "timestamp": 1586335186721,
+  "client": "1234",
+  "currency": "EUR"
+}
+
+###Asking for history for currency and a given periof in hours
+POST http://localhost:8181/json_api/history
+Accept: application/json
+Content-Type: application/json
+
+{
+  "requestId": "b89577fe-8c37-4962-8af3-7cb89a24q909",
+  "timestamp": 1586335186721,
+  "client": "1234",
+  "currency": "EUR",
+  "period": 24
+}

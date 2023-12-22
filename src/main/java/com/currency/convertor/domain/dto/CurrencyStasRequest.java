@@ -2,7 +2,7 @@ package com.currency.convertor.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class JsonRequest {
+public class CurrencyStasRequest {
     private String requestId;
     private long timestamp;
     private String client;

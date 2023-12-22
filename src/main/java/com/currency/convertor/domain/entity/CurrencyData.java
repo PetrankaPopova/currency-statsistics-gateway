@@ -1,15 +1,20 @@
 package com.currency.convertor.domain.entity;
 
+import com.sun.istack.NotNull;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name = "currency_data")
 public class CurrencyData extends BaseEntity {
     private String currency;
     private Double rate;
-    //private LocalDateTime date;
+    private Date date;
+
 
     public CurrencyData() {
     }
@@ -24,7 +29,7 @@ public class CurrencyData extends BaseEntity {
         this.currency = currency;
     }
 
-    @Column(name = "exchange_rate")
+    @Column(name = "rate")
     public Double getRate() {
         return rate;
     }
@@ -33,13 +38,13 @@ public class CurrencyData extends BaseEntity {
         this.rate = exchangeRate;
     }
 
-    /*@NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
-    public LocalDateTime getDate() {
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDateTime lastUpdated) {
+    public void setDate(Date lastUpdated) {
         this.date = lastUpdated;
-    }*/
+    }
 }

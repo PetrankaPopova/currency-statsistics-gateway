@@ -22,19 +22,19 @@ class ApiServiceImpl implements ApiService {
     }
 
     @Override
-    public JsonResponse processJsonCurrentRequest(JsonRequest jsonRequest) {
+    public CurrencyStasResponse processJsonCurrentRequest(CurrencyStasRequest jsonRequest) {
         String requestId = jsonRequest.getRequestId();
         String client = jsonRequest.getClient();
         String currency = jsonRequest.getCurrency();
 
 
         if (isDuplicateRequest(requestId)) {
-            return new JsonResponse(requestId, client, currency, 0.0);
+            return new CurrencyStasResponse(requestId, client, currency, 0.0);
         }
 
         double data = fetchDataFromFixerIO(currency);
         saveRequestDetails(requestId, client, currency);
-        return new JsonResponse(requestId, client, currency, data);
+        return new CurrencyStasResponse(requestId, client, currency, data);
     }
 
     private double fetchDataFromFixerIO(String currency) {
@@ -55,12 +55,12 @@ class ApiServiceImpl implements ApiService {
     }
 
     @Override
-    public JsonResponse processJsonHistoryRequest(JsonRequest jsonRequest) {
+    public CurrencyStasResponse processJsonHistoryRequest(CurrencyStasRequest jsonRequest) {
         String requestId = jsonRequest.getRequestId();
         String client = jsonRequest.getClient();
         String currency = jsonRequest.getCurrency();
         int period = jsonRequest.getPeriod();
-        return new JsonResponse(requestId, client, currency, period);
+        return new CurrencyStasResponse(requestId, client, currency, period);
     }
 
     private boolean isDuplicateRequest(String requestId) {

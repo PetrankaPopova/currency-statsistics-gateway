@@ -18,7 +18,6 @@ public class CurrencyController {
     @GetMapping("/fetchData")
     public String fetchData() {
         return currencyService.fetchDataAndStoreInDatabase();
-
     }
 
     // JSON API

@@ -1,6 +1,12 @@
-package com.currency.convertor.domain.client;
+package com.currency.convertor.client;
 
+import com.currency.convertor.domain.dto.CurrencyApiResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -8,21 +14,32 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Map;
 
+@Service
 public class FixerIoApiClient {
-    private static final String FIXER_API_URL = "https://api.fixer.io/latest";
+
+    private final RestTemplate restTemplate;
+
+    @Value("${fixer.api.key}")
+    private String fixerApiKey;
+
+    @Value("${fixer.api.url}")
+    private String fixerApiUrl;
+
+    @Autowired
+    public FixerIoApiClient(RestTemplate restTemplate) {
+        this.restTemplate = restTemplate;
+    }
 
     public double fetchDataFromFixerIO(String currency) {
         try {
-            // Build the URL with the base URL and the desired currency
-            URI uri = URI.create(FIXER_API_URL + "?base=USD&symbols=" + currency);
 
             // Create an HTTP client
             HttpClient httpClient = HttpClient.newHttpClient();
 
+            System.out.println(fixerApiKey);
+            System.out.println(fixerApiUrl);
             // Create an HTTP request
-            HttpRequest request = HttpRequest.newBuilder()
-                    .uri(uri)
-                    .build();
+            HttpRequest request = HttpRequest.newBuilder().uri(URI.create(fixerApiUrl + "?access_key=" + fixerApiKey + "&base=USD&symbols=" + currency)).build();
 
             // Send the request and receive the response as a JSON string
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
@@ -59,9 +76,15 @@ public class FixerIoApiClient {
         }
     }
 
-    public static void main(String[] args) {
-        FixerIoApiClient apiClient = new FixerIoApiClient();
-        double data = apiClient.fetchDataFromFixerIO("EUR");
-        System.out.println("Exchange rate for EUR: " + data);
+    public CurrencyApiResponse getCurrencyApiResponse() {
+        return restTemplate.getForObject(fixerApiUrl + "?access_key=" + fixerApiKey, CurrencyApiResponse.class);
+    }
+
+    public String getApiUrl() {
+        return fixerApiUrl + "?access_key=" + fixerApiKey;
+    }
+
+    public ResponseEntity<String> getStringResponseEntity() {
+        return restTemplate.getForEntity(fixerApiUrl + "?access_key=" + fixerApiKey, String.class);
     }
 }

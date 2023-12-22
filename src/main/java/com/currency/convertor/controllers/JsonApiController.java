@@ -1,7 +1,7 @@
 package com.currency.convertor.controllers;
 
-import com.currency.convertor.domain.dto.JsonRequest;
-import com.currency.convertor.domain.dto.JsonResponse;
+import com.currency.convertor.domain.dto.CurrencyStasRequest;
+import com.currency.convertor.domain.dto.CurrencyStasResponse;
 import com.currency.convertor.service.api.ApiService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,12 +19,12 @@ public class JsonApiController {
     }
 
     @PostMapping("/current")
-    public JsonResponse processJsonCurrentRequest(@RequestBody JsonRequest jsonRequest) {
+    public CurrencyStasResponse processJsonCurrentRequest(@RequestBody CurrencyStasRequest jsonRequest) {
         return apiService.processJsonCurrentRequest(jsonRequest);
     }
 
     @PostMapping("/history")
-    public JsonResponse processJsonHistoryRequest(@RequestBody JsonRequest jsonRequest) {
+    public CurrencyStasResponse processJsonHistoryRequest(@RequestBody CurrencyStasRequest jsonRequest) {
         return apiService.processJsonHistoryRequest(jsonRequest);
     }
 }

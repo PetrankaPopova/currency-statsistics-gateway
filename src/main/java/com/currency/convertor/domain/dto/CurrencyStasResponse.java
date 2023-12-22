@@ -2,17 +2,17 @@ package com.currency.convertor.domain.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class JsonResponse {
+public class CurrencyStasResponse {
     private String requestId;
     private String consumer;
     private String currency;
     private double data;
 
-    public JsonResponse() {
+    public CurrencyStasResponse() {
         // Default constructor for Jackson
     }
 
-    public JsonResponse(String requestId, String consumer, String currency, double data) {
+    public CurrencyStasResponse(String requestId, String consumer, String currency, double data) {
         this.requestId = requestId;
         this.consumer = consumer;
         this.currency = currency;
