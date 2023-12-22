@@ -1,22 +1,23 @@
-package com.currency.convertor.service.currency.impl;
+package com.currency.convertor.service.rates.impl;
 
 import com.currency.convertor.client.FixerIoApiClient;
 import com.currency.convertor.domain.dto.CurrencyApiRequest;
 import com.currency.convertor.domain.dto.CurrencyApiResponse;
 import com.currency.convertor.domain.entity.CurrencyData;
 import com.currency.convertor.repository.CurrencyDataRepository;
-import com.currency.convertor.service.CurrencyService;
+import com.currency.convertor.service.rates.CurrencyRatesService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CurrencyServiceImpl implements CurrencyService {
+public class CurrencyRatesServiceImpl implements CurrencyRatesService {
 
     private final FixerIoApiClient apiClient;
     private final CurrencyDataRepository currencyDataRepository;
 
     @Autowired
-    public CurrencyServiceImpl(FixerIoApiClient apiClient, CurrencyDataRepository currencyDataRepository) {
+    public CurrencyRatesServiceImpl(FixerIoApiClient apiClient, CurrencyDataRepository currencyDataRepository) {
         this.apiClient = apiClient;
         this.currencyDataRepository = currencyDataRepository;
     }
@@ -51,5 +52,10 @@ public class CurrencyServiceImpl implements CurrencyService {
     public CurrencyApiResponse processExternalService2(CurrencyApiRequest request) {
         CurrencyApiResponse response = apiClient.getCurrencyApiResponse();
         return new CurrencyApiResponse(request.getCurrency(), response.getRates().get(request.getCurrency()) * 2.0);
+    }
+
+    @Scheduled(fixedRate = 3600000)
+    public void updateCurrencyData() {
+        this.fetchDataAndStoreInDatabase();
     }
 }

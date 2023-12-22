@@ -4,10 +4,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CurrencyStasRequest {
     private String requestId;
-    private long timestamp;
+    private Long timestamp;
     private String client;
     private String currency;
-    private int period;
+    private Integer period;
 
     @JsonProperty("requestId")
     public String getRequestId() {
@@ -19,7 +19,7 @@ public class CurrencyStasRequest {
     }
 
     @JsonProperty("timestamp")
-    public long getTimestamp() {
+    public Long getTimestamp() {
         return timestamp;
     }
 
@@ -46,11 +46,11 @@ public class CurrencyStasRequest {
     }
 
     @JsonProperty("period")
-    public int getPeriod() {
+    public Integer getPeriod() {
         return period;
     }
 
-    public void setPeriod(int period) {
+    public void setPeriod(Integer period) {
         this.period = period;
     }
 

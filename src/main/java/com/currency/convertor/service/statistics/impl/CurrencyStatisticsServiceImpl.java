@@ -1,9 +1,10 @@
-package com.currency.convertor.service.api.impl;
+package com.currency.convertor.service.statistics.impl;
 
 import com.currency.convertor.domain.dto.*;
 import com.currency.convertor.domain.entity.RequestDetails;
 import com.currency.convertor.repository.RequestDetailsRepository;
-import com.currency.convertor.service.api.ApiService;
+import com.currency.convertor.service.statistics.CurrencyStatisticsService;
+import org.hibernate.cfg.NotYetImplementedException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -12,12 +13,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-class ApiServiceImpl implements ApiService {
+class CurrencyStatisticsServiceImpl implements CurrencyStatisticsService {
     private RequestDetailsRepository requestDetailsRepository;
     private final RestTemplate restTemplate;
     private final Set<String> previousRequestIds = new HashSet<>();
 
-    ApiServiceImpl(RestTemplate restTemplate) {
+    CurrencyStatisticsServiceImpl(RestTemplate restTemplate) {
         this.restTemplate = restTemplate;
     }
 
@@ -51,7 +52,9 @@ class ApiServiceImpl implements ApiService {
 
     @Override
     public XmlResponse processXmlCommand(XmlRequest xmlRequest) {
-        return null;
+        //todo: implement this
+        throw new NotYetImplementedException();
+//        return null;
     }
 
     @Override
