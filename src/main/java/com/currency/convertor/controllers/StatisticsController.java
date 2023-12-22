@@ -2,6 +2,8 @@ package com.currency.convertor.controllers;
 
 import com.currency.convertor.domain.dto.CurrencyStasRequest;
 import com.currency.convertor.domain.dto.CurrencyStasResponse;
+import com.currency.convertor.domain.dto.CurrencyStatsHistoryResponse;
+import com.currency.convertor.exception.DuplicateRequestIdException;
 import com.currency.convertor.service.statistics.CurrencyStatisticsService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,12 +21,12 @@ public class StatisticsController {
     }
 
     @PostMapping("/current")
-    public CurrencyStasResponse processJsonCurrentRequest(@RequestBody CurrencyStasRequest jsonRequest) {
+    public CurrencyStasResponse processJsonCurrentRequest(@RequestBody CurrencyStasRequest jsonRequest) throws DuplicateRequestIdException {
         return currencyStatisticsService.processJsonCurrentRequest(jsonRequest);
     }
 
     @PostMapping("/history")
-    public CurrencyStasResponse processJsonHistoryRequest(@RequestBody CurrencyStasRequest jsonRequest) {
+    public CurrencyStatsHistoryResponse processJsonHistoryRequest(@RequestBody CurrencyStasRequest jsonRequest) throws DuplicateRequestIdException {
         return currencyStatisticsService.processJsonHistoryRequest(jsonRequest);
     }
 }

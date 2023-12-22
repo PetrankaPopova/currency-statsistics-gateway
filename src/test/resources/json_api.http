@@ -5,10 +5,10 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "requestId": "b89577fe-8c37-4962-8af3-7cb89a245160",
-  "timestamp": 1586335186721,
+  "requestId": "b89577fe-8c37-4962-8af3-7cb89a245320",
+  "timestamp": 1703248803,
   "client": "1234",
-  "currency": "EUR"
+  "currency": "BGN"
 }
 
 ###Asking for history for currency and a given periof in hours
@@ -17,9 +17,9 @@ Accept: application/json
 Content-Type: application/json
 
 {
-  "requestId": "b89577fe-8c37-4962-8af3-7cb89a24q909",
-  "timestamp": 1586335186721,
+  "requestId": "b89577fe-8c37-4962-8af3-7cb89a23q509",
+  "timestamp": 1703255762,
   "client": "1234",
-  "currency": "EUR",
-  "period": 24
+  "currency": "BGN",
+  "period": 1
 }

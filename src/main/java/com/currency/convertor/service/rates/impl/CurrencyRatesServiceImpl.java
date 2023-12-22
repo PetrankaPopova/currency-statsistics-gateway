@@ -27,6 +27,7 @@ public class CurrencyRatesServiceImpl implements CurrencyRatesService {
 
         CurrencyApiResponse response = apiClient.getCurrencyApiResponse();
         var date = response.getDate();
+        var timestamp = response.getTimestamp();
 
         if (response != null && response.isSuccess()) {
             response.getRates().forEach((key, value) -> {
@@ -35,6 +36,7 @@ public class CurrencyRatesServiceImpl implements CurrencyRatesService {
                 currencyData.setCurrency(key);
                 currencyData.setRate(value);
                 currencyData.setDate(date);
+                currencyData.setTimestamp(timestamp);
 
                 currencyDataRepository.save(currencyData);
             });

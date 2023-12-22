@@ -1,9 +1,7 @@
 package com.currency.convertor.domain.dto;
 
 import org.springframework.format.annotation.DateTimeFormat;
-
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +11,7 @@ public class CurrencyApiResponse implements Serializable {
     private boolean success;
     private Map<String, Double> rates;
     private Date date;
+    private Long timestamp;
 
     public CurrencyApiResponse() {
         this.rates = new HashMap<>();
@@ -50,4 +49,11 @@ public class CurrencyApiResponse implements Serializable {
         this.rates = rates;
     }
 
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
+    }
 }

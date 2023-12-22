@@ -7,7 +7,7 @@ public class CurrencyStasRequest {
     private Long timestamp;
     private String client;
     private String currency;
-    private Integer period;
+    private Long period;
 
     @JsonProperty("requestId")
     public String getRequestId() {
@@ -46,11 +46,11 @@ public class CurrencyStasRequest {
     }
 
     @JsonProperty("period")
-    public Integer getPeriod() {
+    public Long getPeriod() {
         return period;
     }
 
-    public void setPeriod(Integer period) {
+    public void setPeriod(Long period) {
         this.period = period;
     }
 
