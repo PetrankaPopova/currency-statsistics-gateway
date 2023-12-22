@@ -1,0 +1,23 @@
+
+###Asking for the latest stored for a currency
+POST http://localhost:8181/xml_api/command
+Accept: application/xml
+Content-Type: application/xml
+
+<command id="1234">
+    <get consumer="136171162">
+        <currency>
+            EUR
+        </currency>
+    </get>
+</command>
+
+
+###Asking for the latest stored for a currency
+POST http://localhost:8181/xml_api/command
+Accept: application/xml
+Content-Type: application/xml
+
+<command id="1234">
+    <history consumer="235465" currenty="BGN" period="3"/>
+</command>
