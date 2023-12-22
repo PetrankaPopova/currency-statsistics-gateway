@@ -22,11 +22,11 @@ public class StatisticsController {
 
     @PostMapping("/current")
     public CurrencyStasResponse processJsonCurrentRequest(@RequestBody CurrencyStasRequest jsonRequest) throws DuplicateRequestIdException {
-        return currencyStatisticsService.processJsonCurrentRequest(jsonRequest);
+        return currencyStatisticsService.processCurrencyStatsRequest(jsonRequest);
     }
 
     @PostMapping("/history")
     public CurrencyStatsHistoryResponse processJsonHistoryRequest(@RequestBody CurrencyStasRequest jsonRequest) throws DuplicateRequestIdException {
-        return currencyStatisticsService.processJsonHistoryRequest(jsonRequest);
+        return currencyStatisticsService.processCurrencyHistoryRequest(jsonRequest);
     }
 }

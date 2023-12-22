@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CurrencyStasResponse {
     private String requestId;
-    private String consumer;
+    private Long consumer;
     private String currency;
     private CurrencyData data;
 
@@ -13,7 +13,7 @@ public class CurrencyStasResponse {
         // Default constructor for Jackson
     }
 
-    public CurrencyStasResponse(String requestId, String consumer, String currency, CurrencyData data) {
+    public CurrencyStasResponse(String requestId, Long consumer, String currency, CurrencyData data) {
         this.requestId = requestId;
         this.consumer = consumer;
         this.currency = currency;
@@ -30,11 +30,11 @@ public class CurrencyStasResponse {
     }
 
     @JsonProperty("consumer")
-    public String getConsumer() {
+    public Long getConsumer() {
         return consumer;
     }
 
-    public void setConsumer(String consumer) {
+    public void setConsumer(Long consumer) {
         this.consumer = consumer;
     }
 

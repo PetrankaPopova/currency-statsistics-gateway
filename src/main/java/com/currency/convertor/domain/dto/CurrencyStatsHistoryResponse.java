@@ -7,8 +7,18 @@ import java.util.List;
 
 public class CurrencyStatsHistoryResponse {
 
+    List<CurrencyData> stats;
+    Long period;
     private String requestId;
-    private String consumer;
+    private Long consumer;
+    private String currency;
+    public CurrencyStatsHistoryResponse(String requestId, Long consumer, String currency, List<CurrencyData> stats, Long period) {
+        this.requestId = requestId;
+        this.consumer = consumer;
+        this.currency = currency;
+        this.stats = stats;
+        this.period = period;
+    }
 
     public String getRequestId() {
         return requestId;
@@ -18,11 +28,11 @@ public class CurrencyStatsHistoryResponse {
         this.requestId = requestId;
     }
 
-    public String getConsumer() {
+    public Long getConsumer() {
         return consumer;
     }
 
-    public void setConsumer(String consumer) {
+    public void setConsumer(Long consumer) {
         this.consumer = consumer;
     }
 
@@ -49,16 +59,4 @@ public class CurrencyStatsHistoryResponse {
     public void setPeriod(Long period) {
         this.period = period;
     }
-
-    public CurrencyStatsHistoryResponse(String requestId, String consumer, String currency, List<CurrencyData> stats, Long period) {
-        this.requestId = requestId;
-        this.consumer = consumer;
-        this.currency = currency;
-        this.stats = stats;
-        this.period = period;
-    }
-
-    private String currency;
-    List<CurrencyData> stats;
-    Long period;
 }

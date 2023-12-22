@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CurrencyStasRequest {
     private String requestId;
     private Long timestamp;
-    private String client;
+    private Long client;
     private String currency;
     private Long period;
 
@@ -28,11 +28,11 @@ public class CurrencyStasRequest {
     }
 
     @JsonProperty("client")
-    public String getClient() {
+    public Long getClient() {
         return client;
     }
 
-    public void setClient(String client) {
+    public void setClient(Long client) {
         this.client = client;
     }
 

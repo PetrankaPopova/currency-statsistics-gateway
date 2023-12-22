@@ -10,7 +10,7 @@ import java.util.Date;
 @Table(schema = "request_details")
 public class RequestDetails extends BaseEntity{
     private String requestId;
-    private String client;
+    private Long client;
     private String currency;
 
     private LocalDateTime timestamp;
@@ -28,11 +28,11 @@ public class RequestDetails extends BaseEntity{
     }
 
     @Column(name = "client")
-    public String getClient() {
+    public Long getClient() {
         return client;
     }
 
-    public void setClient(String client) {
+    public void setClient(Long client) {
         this.client = client;
     }
 
