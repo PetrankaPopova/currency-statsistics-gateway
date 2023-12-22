@@ -9,10 +9,12 @@ services:
     ports:
       - "3307:3306"
 
-  redis:
-    image: redis:latest
+  rabbitmq:
+    image: "rabbitmq:3-management"
     ports:
-      - "6379:6379"
-      - "6380:6380" # Expose Redis Streams port
+      - "5672:5672"    # RabbitMQ default port
+      - "15672:15672"  # RabbitMQ management plugin
 
-# Add any additional configuration for Redis Streams here if needed
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest

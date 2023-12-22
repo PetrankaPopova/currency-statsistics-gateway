@@ -1,6 +1,7 @@
 package com.currency.convertor.service.rates.impl;
 
 import com.currency.convertor.client.FixerIoApiClient;
+import com.currency.convertor.client.RabbitMQSender;
 import com.currency.convertor.domain.dto.CurrencyApiRequest;
 import com.currency.convertor.domain.dto.CurrencyApiResponse;
 import com.currency.convertor.domain.entity.CurrencyData;
@@ -14,11 +15,14 @@ import org.springframework.stereotype.Service;
 public class CurrencyRatesServiceImpl implements CurrencyRatesService {
 
     private final FixerIoApiClient apiClient;
+
+    private final RabbitMQSender mqClient;
     private final CurrencyDataRepository currencyDataRepository;
 
     @Autowired
-    public CurrencyRatesServiceImpl(FixerIoApiClient apiClient, CurrencyDataRepository currencyDataRepository) {
+    public CurrencyRatesServiceImpl(FixerIoApiClient apiClient, RabbitMQSender mqClient, CurrencyDataRepository currencyDataRepository) {
         this.apiClient = apiClient;
+        this.mqClient = mqClient;
         this.currencyDataRepository = currencyDataRepository;
     }
 
@@ -29,7 +33,7 @@ public class CurrencyRatesServiceImpl implements CurrencyRatesService {
         var date = response.getDate();
         var timestamp = response.getTimestamp();
 
-        if (response != null && response.isSuccess()) {
+        if (response.isSuccess()) {
             response.getRates().forEach((key, value) -> {
 
                 CurrencyData currencyData = new CurrencyData();
@@ -38,7 +42,10 @@ public class CurrencyRatesServiceImpl implements CurrencyRatesService {
                 currencyData.setDate(date);
                 currencyData.setTimestamp(timestamp);
 
-                currencyDataRepository.save(currencyData);
+                var result = currencyDataRepository.save(currencyData);
+
+                //todo serialize and send the result
+                mqClient.sendMessageToCurrencyStats("new currency stats saved with id=" + result.getId());
             });
         }
         return apiClient.getApiUrl();
