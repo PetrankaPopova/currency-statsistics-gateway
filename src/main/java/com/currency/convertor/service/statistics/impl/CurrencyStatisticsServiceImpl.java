@@ -47,22 +47,18 @@ class CurrencyStatisticsServiceImpl implements CurrencyStatisticsService {
         CurrencyStasResponse response = new CurrencyStasResponse(requestId, client, currency, data);
 
         String serializedResponse = serializeToJson(response);
-        mqClient.sendMessageToCurrencyStats(serializedResponse);
-
-        return response;
-
-
+        mqClient.sendMessageToRequestHistory(serializedResponse);
+        mqClient.sendMessageToRequestHistory("new request history saved with id=" + response.getRequestId());
        // return new CurrencyStasResponse(requestId, client, currency, data);
+        return response;
     }
-
-    private String serializeToJson(CurrencyStasResponse response) {
+    private String serializeToJson(Object obj) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
-            return objectMapper.writeValueAsString(response);
+            return objectMapper.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
-            throw new RuntimeException("Error serializing CurrencyStasResponse to JSON", e);
-
+            throw new RuntimeException("Error serializing object to JSON", e);
         }
     }
 
