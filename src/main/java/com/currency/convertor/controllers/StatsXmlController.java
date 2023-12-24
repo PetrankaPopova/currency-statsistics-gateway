@@ -5,7 +5,6 @@ import com.currency.convertor.domain.dto.XmlRequest;
 import com.currency.convertor.domain.dto.XmlResponse;
 import com.currency.convertor.exception.DuplicateRequestIdException;
 import com.currency.convertor.service.statistics.CurrencyStatisticsService;
-import org.apache.tomcat.jni.Time;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;

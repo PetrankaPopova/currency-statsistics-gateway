@@ -7,6 +7,8 @@ import com.currency.convertor.domain.dto.CurrencyApiResponse;
 import com.currency.convertor.domain.entity.CurrencyData;
 import com.currency.convertor.repository.CurrencyDataRepository;
 import com.currency.convertor.service.rates.CurrencyRatesService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -43,12 +45,22 @@ public class CurrencyRatesServiceImpl implements CurrencyRatesService {
                 currencyData.setTimestamp(timestamp);
 
                 var result = currencyDataRepository.save(currencyData);
-
-                //todo serialize and send the result
+                String serializedResult = serializeToJson(result);
+                mqClient.sendMessageToCurrencyStats(serializedResult);
                 mqClient.sendMessageToCurrencyStats("new currency stats saved with id=" + result.getId());
             });
         }
         return apiClient.getApiUrl();
+    }
+
+    private String serializeToJson(CurrencyData currencyData) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.writeValueAsString(currencyData);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            return "";
+        }
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.currency.convertor.service.statistics.impl;
 
+import com.currency.convertor.client.RabbitMQSender;
 import com.currency.convertor.domain.dto.CurrencyStasRequest;
 import com.currency.convertor.domain.dto.CurrencyStasResponse;
 import com.currency.convertor.domain.dto.CurrencyStatsHistoryResponse;
@@ -9,6 +10,8 @@ import com.currency.convertor.exception.DuplicateRequestIdException;
 import com.currency.convertor.repository.CurrencyDataRepository;
 import com.currency.convertor.repository.RequestDetailsRepository;
 import com.currency.convertor.service.statistics.CurrencyStatisticsService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -17,11 +20,13 @@ import java.util.Set;
 
 @Service
 class CurrencyStatisticsServiceImpl implements CurrencyStatisticsService {
+    private final RabbitMQSender mqClient;
     private final Set<String> previousRequestIds = new HashSet<>();
     private final RequestDetailsRepository requestDetailsRepository;
     private final CurrencyDataRepository currencyDataRepository;
 
-    CurrencyStatisticsServiceImpl(RequestDetailsRepository requestDetailsRepository, CurrencyDataRepository currencyDataRepository) {
+    CurrencyStatisticsServiceImpl(RabbitMQSender mqClient, RequestDetailsRepository requestDetailsRepository, CurrencyDataRepository currencyDataRepository) {
+        this.mqClient = mqClient;
         this.requestDetailsRepository = requestDetailsRepository;
         this.currencyDataRepository = currencyDataRepository;
     }
@@ -39,8 +44,26 @@ class CurrencyStatisticsServiceImpl implements CurrencyStatisticsService {
         CurrencyData data = fetchRecordForCurrency(currency);
 
         saveRequestDetails(requestId, client, currency);
+        CurrencyStasResponse response = new CurrencyStasResponse(requestId, client, currency, data);
 
-        return new CurrencyStasResponse(requestId, client, currency, data);
+        String serializedResponse = serializeToJson(response);
+        mqClient.sendMessageToCurrencyStats(serializedResponse);
+
+        return response;
+
+
+       // return new CurrencyStasResponse(requestId, client, currency, data);
+    }
+
+    private String serializeToJson(CurrencyStasResponse response) {
+        try {
+            ObjectMapper objectMapper = new ObjectMapper();
+            return objectMapper.writeValueAsString(response);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Error serializing CurrencyStasResponse to JSON", e);
+
+        }
     }
 
     private CurrencyData fetchRecordForCurrency(String currency) {
