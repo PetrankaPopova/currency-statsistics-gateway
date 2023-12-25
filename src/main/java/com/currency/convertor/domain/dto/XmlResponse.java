@@ -8,8 +8,8 @@ import java.util.List;
 
 @XmlRootElement(name = "response")
 public class XmlResponse {
-    List<CurrencyData> stats;
-    Long period;
+    private List<CurrencyData> stats;
+    private Long period;
 
     @XmlElement
     public List<CurrencyData> getStats() {
@@ -35,7 +35,6 @@ public class XmlResponse {
     private CurrencyData data;
 
     public XmlResponse() {
-        // Default constructor for JAXB
     }
 
     public XmlResponse(

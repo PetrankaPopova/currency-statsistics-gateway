@@ -20,16 +20,6 @@ public class CurrencyController {
         return currencyRatesService.fetchDataAndStoreInDatabase();
     }
 
-    // JSON API
-    @PostMapping(value = "/ext-service-1/json", consumes = "application/json", produces = "application/json")
-    public CurrencyApiResponse extService1Json(@RequestBody CurrencyApiRequest request) {
-        return currencyRatesService.processExternalService1(request);
-    }
 
-    // XML API
-    @PostMapping(value = "/ext-service-2/xml", consumes = "application/xml", produces = "application/xml")
-    public CurrencyApiResponse extService2Xml(@RequestBody CurrencyApiRequest request) {
-        return currencyRatesService.processExternalService2(request);
-    }
 }
 

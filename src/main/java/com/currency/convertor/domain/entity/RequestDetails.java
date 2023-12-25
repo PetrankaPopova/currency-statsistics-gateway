@@ -18,7 +18,7 @@ public class RequestDetails extends BaseEntity{
     public RequestDetails() {
     }
 
-    @Column(name = "request_id")
+    @Column(name = "request_id", nullable = false)
     public String getRequestId() {
         return requestId;
     }
@@ -27,7 +27,7 @@ public class RequestDetails extends BaseEntity{
         this.requestId = requestId;
     }
 
-    @Column(name = "client")
+    @Column(name = "client", nullable = false)
     public Long getClient() {
         return client;
     }
@@ -36,7 +36,7 @@ public class RequestDetails extends BaseEntity{
         this.client = client;
     }
 
-    @Column(name = "currency")
+    @Column(name = "currency", nullable = false)
     public String getCurrency() {
         return currency;
     }
@@ -45,7 +45,7 @@ public class RequestDetails extends BaseEntity{
         this.currency = currency;
     }
 
-    @Column(name = "timestamp")
+    @Column(name = "timestamp", nullable = false)
     public LocalDateTime getTimestamp() {
         return timestamp;
     }

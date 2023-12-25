@@ -9,9 +9,7 @@ public class CurrencyStasResponse {
     private String currency;
     private CurrencyData data;
 
-    public CurrencyStasResponse() {
-        // Default constructor for Jackson
-    }
+
 
     public CurrencyStasResponse(String requestId, Long consumer, String currency, CurrencyData data) {
         this.requestId = requestId;

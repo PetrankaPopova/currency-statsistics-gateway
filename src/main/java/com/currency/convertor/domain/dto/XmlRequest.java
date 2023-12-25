@@ -11,6 +11,9 @@ public class XmlRequest {
     private GetRequest get;
     private HistoryRequest history;
 
+    public XmlRequest() {
+    }
+
     @XmlAttribute
     public String getId() {
         return id;

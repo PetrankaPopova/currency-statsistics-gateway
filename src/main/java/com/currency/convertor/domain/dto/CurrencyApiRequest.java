@@ -9,6 +9,7 @@ public class CurrencyApiRequest {
     private Map<String, Double> rates;
     private LocalDateTime date;
 
+
     public CurrencyApiRequest() {
         this.rates = new HashMap<>();
     }

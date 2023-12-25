@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/json_api")
 public class StatisticsController {
-    // Assuming you have a service class to handle the logic
     private final CurrencyStatisticsService currencyStatisticsService;
 
     public StatisticsController(CurrencyStatisticsService currencyStatisticsService) {

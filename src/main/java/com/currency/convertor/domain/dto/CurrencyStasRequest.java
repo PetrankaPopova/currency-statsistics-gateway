@@ -9,6 +9,9 @@ public class CurrencyStasRequest {
     private String currency;
     private Long period;
 
+    public CurrencyStasRequest() {
+    }
+
     @JsonProperty("requestId")
     public String getRequestId() {
         return requestId;

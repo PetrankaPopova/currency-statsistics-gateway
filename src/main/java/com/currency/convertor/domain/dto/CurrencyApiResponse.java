@@ -56,4 +56,8 @@ public class CurrencyApiResponse implements Serializable {
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
     }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
 }

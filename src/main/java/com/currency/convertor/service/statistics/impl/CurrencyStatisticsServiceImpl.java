@@ -45,8 +45,7 @@ class CurrencyStatisticsServiceImpl implements CurrencyStatisticsService {
         LOGGER.info("step1");
 
         if (isDuplicateRequest(requestId)) {
-            throw new DuplicateRequestIdException();
-        }
+            throw new DuplicateRequestIdException();}
 
         CurrencyData data = fetchRecordForCurrency(currency);
 
@@ -55,7 +54,6 @@ class CurrencyStatisticsServiceImpl implements CurrencyStatisticsService {
 
         String serializedResponse = serializeToJson(response);
         mqClient.sendMessageToRequestHistory(serializedResponse);
-        // return new CurrencyStasResponse(requestId, client, currency, data);
         return response;
     }
 

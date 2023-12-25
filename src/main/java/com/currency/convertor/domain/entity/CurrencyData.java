@@ -17,19 +17,11 @@ public class CurrencyData extends BaseEntity {
     private Date date;
     private Long timestamp;
 
-    public Long getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(Long timestamp) {
-        this.timestamp = timestamp;
-    }
 
     public CurrencyData() {
     }
 
-
-    @Column(name = "currency")
+    @Column(name = "currency", nullable = false)
     public String getCurrency() {
         return currency;
     }
@@ -38,7 +30,7 @@ public class CurrencyData extends BaseEntity {
         this.currency = currency;
     }
 
-    @Column(name = "rate")
+    @Column(name = "rate", nullable = false)
     public Double getRate() {
         return rate;
     }
@@ -55,5 +47,13 @@ public class CurrencyData extends BaseEntity {
 
     public void setDate(Date lastUpdated) {
         this.date = lastUpdated;
+    }
+
+    public Long getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(Long timestamp) {
+        this.timestamp = timestamp;
     }
 }

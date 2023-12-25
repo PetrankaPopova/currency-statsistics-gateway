@@ -32,22 +32,11 @@ public class FixerIoApiClient {
 
     public double fetchDataFromFixerIO(String currency) {
         try {
-
-            // Create an HTTP client
             HttpClient httpClient = HttpClient.newHttpClient();
-
-            System.out.println(fixerApiKey);
-            System.out.println(fixerApiUrl);
-            // Create an HTTP request
             HttpRequest request = HttpRequest.newBuilder().uri(URI.create(fixerApiUrl + "?access_key=" + fixerApiKey + "&base=USD&symbols=" + currency)).build();
-
-            // Send the request and receive the response as a JSON string
             HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
-
-            // Parse the JSON response
             Map<String, Object> responseData = parseJsonResponse(response.body());
 
-            // Extract the exchange rate for the specified currency
             if (responseData.containsKey("rates")) {
                 Map<String, Double> rates = (Map<String, Double>) responseData.get("rates");
                 if (rates.containsKey(currency)) {
@@ -55,23 +44,18 @@ public class FixerIoApiClient {
                 }
             }
 
-            // Handle the case when the currency is not found or there is an issue with the response
+
             throw new RuntimeException("Unable to fetch data from Fixer.io for currency: " + currency);
         } catch (Exception e) {
-            // Handle exceptions such as IOException or InterruptedException
             throw new RuntimeException("Error fetching data from Fixer.io", e);
         }
     }
 
     private Map parseJsonResponse(String jsonResponse) {
         try {
-            // Create an ObjectMapper instance (Jackson library)
             ObjectMapper objectMapper = new ObjectMapper();
-
-            // Parse the JSON string into a Map<String, Object>
             return objectMapper.readValue(jsonResponse, Map.class);
         } catch (Exception e) {
-            // Handle exceptions during JSON parsing
             throw new RuntimeException("Error parsing JSON response", e);
         }
     }

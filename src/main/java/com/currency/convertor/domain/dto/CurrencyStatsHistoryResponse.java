@@ -7,8 +7,8 @@ import java.util.List;
 
 public class CurrencyStatsHistoryResponse {
 
-    List<CurrencyData> stats;
-    Long period;
+    private List<CurrencyData> stats;
+    private Long period;
     private String requestId;
     private Long consumer;
     private String currency;

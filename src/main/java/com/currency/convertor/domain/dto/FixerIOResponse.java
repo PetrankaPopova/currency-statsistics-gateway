@@ -12,6 +12,9 @@ public class FixerIOResponse {
     private String base;
     private Map<String, Double> rates;
 
+    public FixerIOResponse() {
+    }
+
     @JsonProperty("success")
     public boolean isSuccess() {
         return success;
