@@ -12,14 +12,19 @@ import com.currency.convertor.repository.RequestDetailsRepository;
 import com.currency.convertor.service.statistics.CurrencyStatisticsService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
 @Service
 class CurrencyStatisticsServiceImpl implements CurrencyStatisticsService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CurrencyStatisticsServiceImpl.class);
     private final RabbitMQSender mqClient;
     private final Set<String> previousRequestIds = new HashSet<>();
     private final RequestDetailsRepository requestDetailsRepository;
@@ -37,6 +42,8 @@ class CurrencyStatisticsServiceImpl implements CurrencyStatisticsService {
         Long client = jsonRequest.getClient();
         String currency = jsonRequest.getCurrency();
 
+        LOGGER.info("step1");
+
         if (isDuplicateRequest(requestId)) {
             throw new DuplicateRequestIdException();
         }
@@ -48,11 +55,11 @@ class CurrencyStatisticsServiceImpl implements CurrencyStatisticsService {
 
         String serializedResponse = serializeToJson(response);
         mqClient.sendMessageToRequestHistory(serializedResponse);
-        mqClient.sendMessageToRequestHistory("new request history saved with id=" + response.getRequestId());
-       // return new CurrencyStasResponse(requestId, client, currency, data);
+        // return new CurrencyStasResponse(requestId, client, currency, data);
         return response;
     }
-    private String serializeToJson(Object obj) {
+
+    private String serializeToJson(CurrencyStasResponse obj) {
         try {
             ObjectMapper objectMapper = new ObjectMapper();
             return objectMapper.writeValueAsString(obj);
@@ -84,7 +91,7 @@ class CurrencyStatisticsServiceImpl implements CurrencyStatisticsService {
         return new CurrencyStatsHistoryResponse(requestId, client, currency, result, periodInHours);
     }
 
-    private boolean isDuplicateRequest(String requestId) {
+    synchronized private boolean isDuplicateRequest(String requestId) {
 
         if (previousRequestIds.contains(requestId)) {
             return true;
@@ -103,4 +110,5 @@ class CurrencyStatisticsServiceImpl implements CurrencyStatisticsService {
 
         requestDetailsRepository.save(requestDetails);
     }
+
 }
