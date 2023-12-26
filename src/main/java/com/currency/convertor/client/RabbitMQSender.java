@@ -35,4 +35,5 @@ public class RabbitMQSender {
     public void listenHistory(Message message){
 
     }
+
 }

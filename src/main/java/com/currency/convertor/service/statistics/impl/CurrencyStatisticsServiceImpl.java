@@ -23,14 +23,14 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Service
-class CurrencyStatisticsServiceImpl implements CurrencyStatisticsService {
+public class CurrencyStatisticsServiceImpl implements CurrencyStatisticsService {
     private static final Logger LOGGER = LoggerFactory.getLogger(CurrencyStatisticsServiceImpl.class);
     private final RabbitMQSender mqClient;
     private final Set<String> previousRequestIds = new HashSet<>();
     private final RequestDetailsRepository requestDetailsRepository;
     private final CurrencyDataRepository currencyDataRepository;
 
-    CurrencyStatisticsServiceImpl(RabbitMQSender mqClient, RequestDetailsRepository requestDetailsRepository, CurrencyDataRepository currencyDataRepository) {
+    public CurrencyStatisticsServiceImpl(RabbitMQSender mqClient, RequestDetailsRepository requestDetailsRepository, CurrencyDataRepository currencyDataRepository) {
         this.mqClient = mqClient;
         this.requestDetailsRepository = requestDetailsRepository;
         this.currencyDataRepository = currencyDataRepository;
@@ -42,7 +42,7 @@ class CurrencyStatisticsServiceImpl implements CurrencyStatisticsService {
         Long client = jsonRequest.getClient();
         String currency = jsonRequest.getCurrency();
 
-        LOGGER.info("step1");
+      //  LOGGER.info("step1");
 
         if (isDuplicateRequest(requestId)) {
             throw new DuplicateRequestIdException();}
@@ -89,7 +89,7 @@ class CurrencyStatisticsServiceImpl implements CurrencyStatisticsService {
         return new CurrencyStatsHistoryResponse(requestId, client, currency, result, periodInHours);
     }
 
-    synchronized private boolean isDuplicateRequest(String requestId) {
+    public synchronized boolean isDuplicateRequest(String requestId) {
 
         if (previousRequestIds.contains(requestId)) {
             return true;

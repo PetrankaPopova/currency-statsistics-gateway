@@ -95,6 +95,11 @@
             <artifactId>jaxb-impl</artifactId>
             <version>2.3.1</version> <!-- Use the version compatible with your environment -->
         </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
