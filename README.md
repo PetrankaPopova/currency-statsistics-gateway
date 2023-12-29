@@ -1,9 +1,9 @@
-# currency-statsistics-gateway
+# currency-statistics-gateway
 Currency Gateway Application
 Objective
 The Currency Gateway Application serves as a facade to provide currency data to different customer types. The application collects current currency data from fixer.io, stores it in a relational database, and offers public REST APIs for external services. The system also handles duplicate requests, maintains statistical information, and forwards data through a message broker.
 
-Components
+##Components
 1. Data Collector
    Collects and stores current currency data from fixer.io.
    Periodically refreshes data based on predefined time intervals.
@@ -36,10 +36,10 @@ Components
    Issues and Bug Reports
    Feel free to open issues or submit pull requests for any bugs you may encounter.
 
-License
+##License
 This project is licensed under the MIT License.
 
-Acknowledgments
+##Acknowledgments
 fixer.io for providing currency data.
 Spring Boot for the framework.
 RabbitMQ for message broker integration.
