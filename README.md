@@ -3,7 +3,7 @@ Currency Gateway Application
 Objective
 The Currency Gateway Application serves as a facade to provide currency data to different customer types. The application collects current currency data from fixer.io, stores it in a relational database, and offers public REST APIs for external services. The system also handles duplicate requests, maintains statistical information, and forwards data through a message broker.
 
-##Components
+##Components:
 1. Data Collector
    Collects and stores current currency data from fixer.io.
    Periodically refreshes data based on predefined time intervals.
