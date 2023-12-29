@@ -13,7 +13,17 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Map;
-
+/**
+ * The FixerIoApiClient class is responsible for interacting with the Fixer.io API
+ * to fetch currency exchange rates and related data. It provides methods to retrieve
+ * exchange rates for specific currencies, fetch a complete API response, and obtain
+ * the API URL with the configured access key. The class utilizes the RestTemplate
+ * for making HTTP requests and Jackson ObjectMapper for parsing JSON responses.
+ *
+ * Note: The class also includes methods for fetching data directly from Fixer.io using
+ * HttpClient, but the primary methods rely on RestTemplate for better integration
+ * with Spring Boot applications.
+ */
 @Service
 public class FixerIoApiClient {
 

@@ -7,6 +7,17 @@ import org.springframework.amqp.rabbit.annotation.Queue;
 import org.springframework.amqp.rabbit.annotation.QueueBinding;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Component;
+/**
+ * The RabbitMQSender class is a Spring component responsible for sending messages to
+ * RabbitMQ queues within the currency converter application. It uses the AmqpTemplate
+ * to convert and send messages to the designated queues, namely 'currency_stats' for
+ * real-time currency statistics and 'request_history' for storing historical request details.
+ *
+ * This class provides methods for sending messages to each queue, namely sendMessageToCurrencyStats
+ * and sendMessageToRequestHistory. Additionally, it includes placeholder methods for listening to
+ * messages on both queues using the @RabbitListener annotation, though these methods are currently
+ * commented out and not actively used in the application.
+ */
 
 @Component
 public class RabbitMQSender {

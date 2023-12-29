@@ -5,7 +5,21 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.time.LocalDateTime;
 import java.util.Date;
-
+/**
+ * The RequestDetails class represents an entity storing details of currency-related requests in the database.
+ * It extends the BaseEntity class, inheriting the common identifier property (id).
+ *
+ * Properties:
+ * - requestId: The unique identifier for the request.
+ * - client: The client associated with the request.
+ * - currency: The currency code associated with the request.
+ * - timestamp: The timestamp indicating when the request details were recorded.
+ *
+ * JPA Annotations:
+ * - @Entity: Indicates that this class is an entity and is mapped to a database table.
+ * - @Table: Specifies the name of the database table to which this entity is mapped.
+ * - @Column: Specifies the mapping of a persistent property or field.
+ */
 @Entity
 @Table(schema = "request_details")
 public class RequestDetails extends BaseEntity{

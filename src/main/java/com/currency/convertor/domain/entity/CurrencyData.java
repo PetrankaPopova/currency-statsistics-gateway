@@ -8,6 +8,23 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import java.sql.Timestamp;
 import java.util.Date;
+/**
+ * The CurrencyData class represents an entity storing currency-related data in the database.
+ * It extends the BaseEntity class, inheriting the common identifier property (id).
+ *
+ * Properties:
+ * - currency: The currency code (e.g., USD).
+ * - rate: The exchange rate for the currency.
+ * - date: The date associated with the currency data.
+ * - timestamp: A timestamp indicating when the currency data was recorded.
+ *
+ * JPA Annotations:
+ * - @Entity: Indicates that this class is an entity and is mapped to a database table.
+ * - @Table: Specifies the name of the database table to which this entity is mapped.
+ * - @Column: Specifies the mapping of a persistent property or field.
+ * - @NotNull: Indicates that the associated property must not be null.
+ * - @DateTimeFormat: Specifies the format for formatting and parsing a Date or Calendar property.
+ */
 
 @Entity
 @Table(name = "currency_data")

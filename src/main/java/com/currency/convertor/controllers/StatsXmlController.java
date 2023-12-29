@@ -11,7 +11,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.Instant;
-
+/**
+ * The StatsXmlController class is a Spring MVC controller annotated with @RestController, indicating that
+ * it handles RESTful API requests. It is mapped to the "/xml_api" path. This controller is responsible for
+ * exposing endpoints related to currency statistics in XML format.
+ *
+ * The class contains a constructor that injects a CurrencyStatisticsService, allowing the controller to interact
+ * with the business logic related to currency statistics.
+ *
+ * The processCommand() method is annotated with @PostMapping and is mapped to the "/command" endpoint. This method
+ * receives an XML request body of type XmlRequest, processes the request using the CurrencyStatisticsService, and returns
+ * the response as an XmlResponse. The method determines whether the request is for current or historical currency
+ * statistics and delegates to the corresponding service method.
+ */
 @RestController
 @RequestMapping("/xml_api")
 public class StatsXmlController {

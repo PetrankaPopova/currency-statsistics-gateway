@@ -14,13 +14,36 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+/**
+ * The CurrencyStatisticsServiceImpl class provides the implementation for the CurrencyStatisticsService interface.
+ * It handles processing requests related to currency statistics, including handling duplicate request IDs, fetching
+ * currency data, and interacting with external systems via RabbitMQ.
+ *
+ * Key Features:
+ * - Handles requests for current and historical currency statistics.
+ * - Ensures uniqueness of request IDs to prevent duplicate processing.
+ * - Utilizes RabbitMQSender to send messages related to request history.
+ * - Implements scheduled tasks using Spring's @Scheduled annotation for periodic operations.
+ *
+ * Methods:
+ * - processCurrencyStatsRequest: Processes a request for current currency statistics, handling duplicate request IDs
+ *   and sending the response to RabbitMQ for request history.
+ * - processCurrencyHistoryRequest: Processes a request for historical currency statistics within a specified period.
+ * - isDuplicateRequest: Checks if the provided request ID is a duplicate, preventing duplicate processing.
+ * - saveRequestDetails: Saves details of the processed request to the repository.
+ * - fetchRecordForCurrency: Fetches the latest currency data record for a given currency.
+ * - serializeToJson: Serializes a CurrencyStasResponse object to JSON format.
+ *
+ * Usage Example:
+ * - Used by controllers to handle incoming requests for currency statistics processing.
+ * - Collaborates with RabbitMQSender, RequestDetailsRepository, and CurrencyDataRepository.
+ * - Ensures data integrity and consistency by preventing duplicate requests.
+ */
 
 @Service
 public class CurrencyStatisticsServiceImpl implements CurrencyStatisticsService {

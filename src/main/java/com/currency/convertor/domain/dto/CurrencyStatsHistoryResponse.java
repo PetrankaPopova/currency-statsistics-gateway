@@ -3,7 +3,20 @@ package com.currency.convertor.domain.dto;
 import com.currency.convertor.domain.entity.CurrencyData;
 
 import java.util.List;
-
+/**
+ * The CurrencyStatsHistoryResponse class is a DTO (Data Transfer Object) representing a response for currency statistics history.
+ * It includes properties such as request ID, consumer (client), currency, statistics data (list of CurrencyData), and period.
+ *
+ * Properties:
+ * - requestId: A unique identifier for the request associated with the response.
+ * - consumer: The client identifier associated with the response.
+ * - currency: The currency code for which historical statistics are provided in the response.
+ * - stats: A list of CurrencyData objects containing historical currency statistics.
+ * - period: The period in hours for which historical statistics are provided.
+ *
+ * This class is designed to facilitate the transfer of data related to currency statistics history responses within the application.
+ * Getter and setter methods are provided for each property.
+ */
 
 public class CurrencyStatsHistoryResponse {
 

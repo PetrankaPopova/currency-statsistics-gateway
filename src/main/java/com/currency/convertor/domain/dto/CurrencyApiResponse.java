@@ -5,7 +5,22 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
+/**
+ * The CurrencyApiResponse class is a DTO (Data Transfer Object) representing a response from an external API
+ * providing currency information. It contains properties such as currency code, success status, rates, date, and timestamp.
+ *
+ * Properties:
+ * - currency: The code of the currency for which information is provided.
+ * - success: A boolean indicating the success status of the API response.
+ * - rates: A map containing currency codes as keys and their corresponding exchange rates as values.
+ * - date: The date associated with the currency information.
+ * - timestamp: A timestamp indicating the time when the API response was received.
+ *
+ * This class is designed to facilitate the transfer of data related to currency information within the application.
+ * The rates property is initialized as an empty HashMap in the constructor. There are getter and setter methods for
+ * each property, and a DateTimeFormat annotation is used to specify the date format. The isSuccess() method is provided
+ * to check the success status of the API response.
+ */
 public class CurrencyApiResponse implements Serializable {
     private String currency;
     private boolean success;
